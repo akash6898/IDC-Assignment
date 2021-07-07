@@ -275,7 +275,7 @@ class _OtpState extends State<Otp> {
           _correctOtp = false;
         });
       } else {
-        Vibrate.feedback(FeedbackType.success);
+        // Vibrate.feedback(FeedbackType.success);
         setState(() {
           _correctOtp = true;
         });
