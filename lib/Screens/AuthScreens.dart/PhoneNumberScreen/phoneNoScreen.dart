@@ -1,9 +1,9 @@
 import 'dart:ui';
+import 'package:idc/Constants/customColors.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vibrate/flutter_vibrate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:idc/customColors.dart';
 import 'package:idc/Widgets/lottieLoading.dart';
 import 'package:idc/notifiers/auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -70,7 +70,7 @@ class _PhoneNoSceenState extends State<PhoneNoSceen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             _modalBottomSheetMenu();
                           },

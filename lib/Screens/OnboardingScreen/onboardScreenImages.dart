@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:idc/textValues.dart';
+import 'package:idc/Constants/textValues.dart';
 
 class OnboardScreenImages extends StatelessWidget {
   OnboardScreenImages({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:idc/customColors.dart';
+import 'package:idc/Constants/customColors.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'onBoardTextColumn.dart';

@@ -28,6 +28,9 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void startTimer() {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
     _start = 30;
     const oneSec = const Duration(seconds: 1);
     _timer = new Timer.periodic(

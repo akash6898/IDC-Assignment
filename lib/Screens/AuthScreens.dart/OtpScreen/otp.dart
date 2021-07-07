@@ -23,7 +23,6 @@ class _OtpState extends State<Otp> {
   String pin = "";
   bool _correctOtp = false;
 
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -79,7 +78,7 @@ class _OtpState extends State<Otp> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        GestureDetector(
+                        InkWell(
                           onTap: () {
                             _modalBottomSheetMenu();
                           },
@@ -110,171 +109,152 @@ class _OtpState extends State<Otp> {
 
   Column buildLoadingAlertResend(BuildContext context) {
     return Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 25.h,
-                      ),
-                      LottieLoading(
-                        show: show,
-                      ),
-                      msg
-                          ? Container(
-                              padding: EdgeInsets.all(14),
-                              child: Text(
-                                  _correctOtp
-                                      ? "OTP Correct"
-                                      : "OTP Incorret",
-                                  style: GoogleFonts.asap(
-                                      color: _correctOtp
-                                          ? CustomColor.green
-                                          : CustomColor.red,
-                                      fontSize: 12)),
-                              color: _correctOtp
-                                  ? CustomColor.lightGreen
-                                  : CustomColor.lightRed,
-                            )
-                          : SizedBox(
-                              height: 0,
-                            ),
-                      (show || msg)
-                          ? SizedBox(
-                              height: 0,
-                            )
-                          : SizedBox(
-                              height: 40.h,
-                            ),
-                      SizedBox(
-                        height: 25.h,
-                      ),
-                      Consumer<AuthProvider>(builder: (_, auth, __) {
-                        if (auth.remainingTime != 0) {
-                          return RichText(
-                              text: TextSpan(children: <TextSpan>[
-                            TextSpan(
-                              text: "Resend OTP in ",
-                              style: GoogleFonts.asap(
-                                color: CustomColor.grey,
-                                fontSize: 10,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "00:" +
-                                  auth.remainingTime
-                                      .toString()
-                                      .padLeft(2, '0'),
-                              style: GoogleFonts.asap(
-                                color: CustomColor.blue,
-                                fontSize: 10,
-                              ),
-                            ),
-                          ]));
-                        } else {
-                          return InkWell(
-                              onTap: () {
-                                context.read<AuthProvider>().resend();
-                              },
-                              child: Text("Resend OTP",
-                                  style: GoogleFonts.asap(
-                                    color: CustomColor.blue,
-                                    fontSize: 10,
-                                  )));
-                        }
-                      }),
-                    ],
-                  );
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 25.h,
+        ),
+        LottieLoading(
+          show: show,
+        ),
+        msg
+            ? Container(
+                padding: EdgeInsets.all(14),
+                child: Text(_correctOtp ? "OTP Correct" : "OTP Incorret",
+                    style: GoogleFonts.asap(
+                        color:
+                            _correctOtp ? CustomColor.green : CustomColor.red,
+                        fontSize: 12)),
+                color:
+                    _correctOtp ? CustomColor.lightGreen : CustomColor.lightRed,
+              )
+            : SizedBox(
+                height: 0,
+              ),
+        (show || msg)
+            ? SizedBox(
+                height: 0,
+              )
+            : SizedBox(
+                height: 40.h,
+              ),
+        SizedBox(
+          height: 25.h,
+        ),
+        Consumer<AuthProvider>(builder: (_, auth, __) {
+          if (auth.remainingTime != 0) {
+            return RichText(
+                text: TextSpan(children: <TextSpan>[
+              TextSpan(
+                text: "Resend OTP in ",
+                style: GoogleFonts.asap(
+                  color: CustomColor.grey,
+                  fontSize: 10,
+                ),
+              ),
+              TextSpan(
+                text: "00:" + auth.remainingTime.toString().padLeft(2, '0'),
+                style: GoogleFonts.asap(
+                  color: CustomColor.blue,
+                  fontSize: 10,
+                ),
+              ),
+            ]));
+          } else {
+            return InkWell(
+                onTap: () {
+                  context.read<AuthProvider>().resend();
+                },
+                child: Text("Resend OTP",
+                    style: GoogleFonts.asap(
+                      color: CustomColor.blue,
+                      fontSize: 10,
+                    )));
+          }
+        }),
+      ],
+    );
   }
-
-
 
   PinPut buildPinPut() {
     return PinPut(
-                      fieldsCount: 6,
-                      onSubmit: (String pin) {
-                        verifyOtp(otp: pin);
-                      },
-                      eachFieldWidth: 10.w,
-                      focusNode: _pinPutFocusNode,
-                      keyboardType: TextInputType.number,
-                      controller: _pinPutController,
-                      textStyle: GoogleFonts.asap(
-                          color: Color.fromRGBO(74, 74, 74, 1), fontSize: 24),
-                      submittedFieldDecoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: msg
-                                      ? (_correctOtp
-                                          ? CustomColor.green
-                                          : CustomColor.red)
-                                      : CustomColor.blue))),
-                      selectedFieldDecoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: msg
-                                      ? (_correctOtp
-                                          ? CustomColor.green
-                                          : CustomColor.red)
-                                      : CustomColor.grey))),
-                      followingFieldDecoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(
-                                  color: msg
-                                      ? (_correctOtp
-                                          ? CustomColor.green
-                                          : CustomColor.red)
-                                      : CustomColor.blue))),
-                    );
+      fieldsCount: 6,
+      onSubmit: (String pin) {
+        verifyOtp(otp: pin);
+      },
+      eachFieldWidth: 10.w,
+      focusNode: _pinPutFocusNode,
+      keyboardType: TextInputType.number,
+      controller: _pinPutController,
+      textStyle:
+          GoogleFonts.asap(color: Color.fromRGBO(74, 74, 74, 1), fontSize: 24),
+      submittedFieldDecoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: msg
+                      ? (_correctOtp ? CustomColor.green : CustomColor.red)
+                      : CustomColor.blue))),
+      selectedFieldDecoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: (msg)
+                      ? (_correctOtp ? CustomColor.green : CustomColor.red)
+                      : CustomColor.blue))),
+      followingFieldDecoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(
+                  color: msg
+                      ? (_correctOtp ? CustomColor.green : CustomColor.red)
+                      : CustomColor.blue))),
+    );
   }
-
-
 
   Column buildTitle() {
     return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Enter your",
-                          style: GoogleFonts.asap(
-                            color: CustomColor.white,
-                            fontSize: 18,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Text(
-                          "Enter OTP",
-                          style: GoogleFonts.asap(
-                            color: CustomColor.black,
-                            fontSize: 27,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        Consumer<AuthProvider>(
-                          builder: (_, auth, __) => Text(
-                            "Please enter the verification code sent to ${auth.phoneNo}",
-                            style: GoogleFonts.asap(
-                              color: CustomColor.grey,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Enter your",
+          style: GoogleFonts.asap(
+            color: CustomColor.white,
+            fontSize: 18,
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        Text(
+          "Enter OTP",
+          style: GoogleFonts.asap(
+            color: CustomColor.black,
+            fontSize: 27,
+          ),
+        ),
+        SizedBox(
+          height: 5.h,
+        ),
+        Consumer<AuthProvider>(
+          builder: (_, auth, __) => Text(
+            "Please enter the verification code sent to ${auth.phoneNo}",
+            style: GoogleFonts.asap(
+              color: CustomColor.grey,
+              fontSize: 10,
+            ),
+          ),
+        ),
+      ],
+    );
   }
-  
 
   Align buildBackButton(BuildContext context) {
     return Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    icon: Icon(Icons.arrow_back_ios_new)),
-              );
+      alignment: Alignment.centerLeft,
+      child: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios_new)),
+    );
   }
 
   void verifyOtp({required String otp}) async {
@@ -301,7 +281,7 @@ class _OtpState extends State<Otp> {
         });
 
         await Future.delayed(Duration(seconds: 1));
-       Navigator.popUntil(context, (route) => route.isFirst);
+        Navigator.popUntil(context, (route) => route.isFirst);
         Navigator.of(context).pushReplacementNamed("/feed");
       }
     }
