@@ -48,8 +48,8 @@ class BuildLoginOptions extends StatelessWidget {
                           Color.fromRGBO(255, 255, 255, 1), // background
                     ),
                     onPressed: () {
-                       Navigator.popUntil(context, (route) => route.isFirst);
-        Navigator.of(context).pushReplacementNamed("/feed");
+                      Navigator.pushNamedAndRemoveUntil(
+            context, "/feed", (Route<dynamic> route) => false);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -78,8 +78,8 @@ class BuildLoginOptions extends StatelessWidget {
                           Color.fromRGBO(255, 255, 255, 1), // background
                     ),
                     onPressed: () {
-                       Navigator.popUntil(context, (route) => route.isFirst);
-                       Navigator.of(context).pushReplacementNamed("/feed");
+                     Navigator.pushNamedAndRemoveUntil(
+            context, "/feed", (Route<dynamic> route) => false);
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

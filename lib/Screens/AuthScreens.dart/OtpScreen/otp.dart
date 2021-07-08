@@ -281,8 +281,10 @@ class _OtpState extends State<Otp> {
         });
 
         await Future.delayed(Duration(seconds: 1));
-        Navigator.popUntil(context, (route) => route.isFirst);
-        Navigator.of(context).pushReplacementNamed("/feed");
+        // Navigator.popUntil(context, (route) => route.isFirst);
+        Navigator.pushNamedAndRemoveUntil(
+            context, "/feed", (Route<dynamic> route) => false);
+        // Navigator.of(context).pushReplacementNamed("/feed");
       }
     }
   }
